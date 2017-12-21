@@ -1,2 +1,3 @@
-#Boilerplate for React/Redux/Firebase App!!!
+#Notes App in React/Redux/Firebase! 
+-Benjamin Geyer
 
