@@ -5,14 +5,11 @@ import moment from 'moment'
 import { setSelectedNote } from '../actions/selectednote'
 
 const NoteListItem = (props) => {
-  // const className = props.note.selected ? 'item item--selected' : 'item'  (this can also be set on redux!)
-  // className={className} onClick={() => { props.Session.set('selectedNoteId', props.note._id) }} for div
+  const className = props.note.id === props.selectedNoteId ? 'item item--selected' : 'item' 
     return (
-      <div onClick={() => props.setSelectedNote(props.note.id)}>
-        <h5 className="item__title">
-          { props.note.title || 'Untitled note' }</h5>
-        <p className="item__subtitle">
-          {moment(props.note.updatedAt).format('MM/DD/YY h:mma')}</p>
+      <div className={className} onClick={() => props.setSelectedNote(props.note.id)}>
+        <h5 className="item__title"> { props.note.title || 'Untitled note' } </h5>
+        <p className="item__subtitle"> {moment(props.note.updatedAt).format('MM/DD/YY h:mma')} </p>
       </div>
   )
 }
@@ -22,4 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
   setSelectedNote: (noteId) => dispatch(setSelectedNote(noteId))
 })
 
-export default connect(undefined, mapDispatchToProps)(NoteListItem)
+const mapStateToProps = (state) => ({
+  selectedNoteId: state.selectedNoteId
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteListItem)

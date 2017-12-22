@@ -1,15 +1,38 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export class Editor extends React.Component {
+import { setSelectedNote } from '../actions/selectednote'
+import { startRemoveNote } from '../actions/notes'
+
+class Editor extends React.Component {
   state = {
-    title: 'test state title',
-    body: 'test body'
+    title: '',
+    body: '',
+    isModalOpen: false
   }
 
   fakeFun = () => {} 
 
+  onRemove = () => {
+    this.props.startRemoveNote(this.props.selectedNoteId )
+    this.props.setSelectedNote("")
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const currentNoteId = this.props.note ? this.props.note.id : undefined
+    const prevNoteId = prevProps.note ? prevProps.note.id : undefined
+
+    if(currentNoteId && currentNoteId !== prevNoteId) {
+      this.setState({
+        title: this.props.note.title,
+        body: this.props.note.body
+      })
+    }
+  }
+
+
   render() {
-    if (true) {
+    if (this.props.note) {
       return (
         <div className="editor">
           <input className="editor__title"
@@ -23,9 +46,7 @@ export class Editor extends React.Component {
             onChange={this.fakeFun}></textarea>
 
           <div>
-            <button className="button button--secondary"
-              onClick={this.fakeFun}>
-              Delete Note</button>
+            <button className="button button--secondary" onClick={this.onRemove}>Delete Note</button>
           </div>
         </div>
       )
@@ -33,11 +54,22 @@ export class Editor extends React.Component {
       return (
         <div className="editor">
           <p className="editor__message">
-            { true ? 'Note not found.' : 'Pick or create a note to get started.'}
+            { this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}
           </p>
         </div>
       )
     }
   }
-
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setSelectedNote: (noteId) => dispatch(setSelectedNote(noteId)),
+  startRemoveNote: (id) => dispatch(startRemoveNote(id))
+})
+
+const mapStateToProps = (state) => ({
+  selectedNoteId: state.selectedNoteId,
+  note: state.notes.filter((note) => note.id === state.selectedNoteId)[0]
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor)

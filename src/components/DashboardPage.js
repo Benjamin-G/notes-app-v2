@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { NoteListPanel } from './NoteListPanel'
-import { Editor } from './Editor'
+import Editor from './Editor'
 
 const DashboardPage = () => (
   <div>
