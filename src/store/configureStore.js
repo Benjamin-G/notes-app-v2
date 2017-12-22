@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 
 import notesReducer from '../reducers/notes'
 import authReducer from '../reducers/auth'
+import selectedIdReducer from '../reducers/selectednote'
 
 
 //Store creation
@@ -13,7 +14,8 @@ export default () => {
   const store = createStore(
     combineReducers({
       notes: notesReducer,
-      auth: authReducer
+      auth: authReducer,
+      selectedNoteId: selectedIdReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
   )
