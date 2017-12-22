@@ -1,4 +1,4 @@
-//import uuid from 'uuid' //Do I need this?
+import moment from 'moment'
 import database from '../firebase/firebase'
 
 // ADD_NOTE
@@ -11,7 +11,7 @@ export const startAddNote = () => {
     const note = {  
       title: 'Untitled Note',
       body: '',
-      updatedAt: 0 
+      updatedAt: moment().valueOf()
     }
     
     return database.ref(`users/${uid}/notes`).push(note).then((ref) => {
@@ -28,6 +28,18 @@ export const startRemoveNote = (id) => {
     const uid = getState().auth.uid
     return database.ref(`users/${uid}/notes/${id}`).remove().then(() => {
       dispatch(removeNote(id))
+    })
+  }
+}
+
+// EDIT_NOTE 
+const editNote = (id, updates) => ({type: 'EDIT_NOTE', id, updates })
+
+export const startEditNote = (id, updates) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return database.ref(`users/${uid}/notes/${id}`).update({ ...updates }).then(() => {
+      dispatch(editNote(id,updates))
     })
   }
 }
