@@ -1,18 +1,28 @@
 .header {
-  background: $dark-blue;
+  background: $header-bg;
+  color: $header-color;
 }
 
 .header__content {
   align-items: center;
   display: flex;
+  height: $header-height;
   justify-content: space-between;
-  padding: $s-size 0;
+  max-width: $site-max-width;
+  margin: 0 auto;
+  padding: $space;
 }
 
 .header__title {
-  color: white;
-  text-decoration: none;
-  h1 {
-    margin: 0;
+  margin: 0;
+}
+
+.header__nav-toggle {
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+
+  @include desktop {
+    display: none;
   }
 }

@@ -2,8 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const NotFoundPage = () => (
-  <div>
-    404 - NOT FOUND - <Link to="/">Go home</Link>
+  <div className="boxed-view">
+    <div className="boxed-view__box">
+      <h1>404 - Page Not Found</h1>
+      <p>We're unable to find that page.</p>
+      <Link to="/" className="button button--link">HEAD HOME</Link>
+    </div>
   </div>
 )
 

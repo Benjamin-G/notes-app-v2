@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import notesReducer from '../reducers/notes'
 import authReducer from '../reducers/auth'
 import selectedIdReducer from '../reducers/selectednote'
+import navReducer from '../reducers/nav'
 
 
 //Store creation
@@ -15,7 +16,8 @@ export default () => {
     combineReducers({
       notes: notesReducer,
       auth: authReducer,
-      selectedNoteId: selectedIdReducer
+      selectedNoteId: selectedIdReducer,
+      isNavOpen: navReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
   )

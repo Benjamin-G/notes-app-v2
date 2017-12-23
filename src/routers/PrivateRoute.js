@@ -5,12 +5,11 @@ import { Route, Redirect } from 'react-router-dom'
 import Header from '../components/Header'
 
 export const PrivateRoute = ({ 
-  isAuthenticated , 
-  component : Component,
-  ...rest
-  }) => (
-  <Route {...rest} component={(props) => (
-    isAuthenticated ? (
+    isAuthenticated , 
+    component : Component,
+    ...rest
+    }) => (
+        <Route {...rest} component={(props) => ( isAuthenticated ? (
       <div>
         <Header/>
         <Component {...props} />

@@ -1,23 +1,40 @@
 .button {
-  background-color: $blue;
-  border:none;
-  color:#FFF;
-  cursor:pointer;
-  display: inline-block;
-  font-size: $font-size-large;
-  font-weight: 300;
-  line-height: 1;
-  padding:$s-size;
-  text-decoration: none;
+  background-color: $button-bg;
+  border: none;
+  color: $button-color;
+  cursor: pointer;
+  font-size: $base-font-size;
+  line-height: 1.2;
+  margin-bottom: $space;
+  padding: $input-spacing;
+  text-transform: uppercase;
 }
 
 .button--link {
-  background: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button--pill {
+   background-color: transparent;
+   border: 1px solid $button-pill-color;
+   color: $button-pill-color;
+   margin: 0 ($space / 2) 0 0;
+   padding: .3rem .8rem;
 }
 
 .button--secondary {
-  background-color: #888;
-  margin-bottom: $m-size;
+  background: $button-secondary-bg;
+  border: 1px solid $button-secondary-border-color;
+  color: $button-secondary-color;
+}
+
+.button--link-text {
+  background: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-transform: none;
 }
 
 .button--login {
